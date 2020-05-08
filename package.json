@@ -2,7 +2,7 @@
   "name": "xyz.bringoff.hexlet-lvl2",
   "version": "0.0.1",
   "description": "Diff checker study project",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
