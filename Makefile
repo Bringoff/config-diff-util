@@ -3,6 +3,8 @@ install-deps:
 
 install: install-deps
 
+ci: install-deps
+
 publish:
 	npm publish
 
