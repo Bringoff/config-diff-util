@@ -32,6 +32,8 @@
     "jest-cli": "^26.0.1"
   },
   "dependencies": {
-    "commander": "^5.1.0"
+    "commander": "^5.1.0",
+    "js-yaml": "^3.13.1",
+    "lodash": "^4.17.15"
   }
 }
