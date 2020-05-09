@@ -4,6 +4,10 @@ Small terminal utility to find a difference between two configuration files.
 
 ### Usage
 
-Run it with the following command: `npx gendiff filepath1 filepath2`
-
+Run it with the following command: `npx gendiff [filepath1] [filepath2]`
+where `filepath1` and `filepath2` must be either relative or absolute paths to config files.
+#### JSON support
 [![asciicast](https://asciinema.org/a/xM0aT55gehKInV2WXgfdj7Uko.svg)](https://asciinema.org/a/xM0aT55gehKInV2WXgfdj7Uko)
+
+#### YAML support
+[![asciicast](https://asciinema.org/a/sRiDlOJVWrfHljBlhxNkZYuK3.svg)](https://asciinema.org/a/sRiDlOJVWrfHljBlhxNkZYuK3)
