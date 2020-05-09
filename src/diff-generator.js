@@ -10,6 +10,8 @@ const getConfigParser = (fileExtension) => {
       return parsers.parseYaml;
     case '.json':
       return parsers.parseJson;
+    case '.ini':
+      return parsers.parseIni;
     default:
       throw new Error('Unsupported config file');
   }
