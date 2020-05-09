@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import _ from 'lodash';
-import parsers from './parsers';
+import parsers from './parsers/index.js';
 
 const getConfigParser = (fileExtension) => {
   switch (fileExtension) {
