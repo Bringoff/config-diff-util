@@ -11,3 +11,6 @@ where `filepath1` and `filepath2` must be either relative or absolute paths to c
 
 #### YAML support
 [![asciicast](https://asciinema.org/a/sRiDlOJVWrfHljBlhxNkZYuK3.svg)](https://asciinema.org/a/sRiDlOJVWrfHljBlhxNkZYuK3)
+
+#### INI support
+[![asciicast](https://asciinema.org/a/jPVzXs9jbX9EREpRlIfi3dnkf.svg)](https://asciinema.org/a/jPVzXs9jbX9EREpRlIfi3dnkf)
