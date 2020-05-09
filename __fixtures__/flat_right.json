@@ -1,5 +1,6 @@
 {
-  "timeout": 20,
-  "verbose": true,
-  "host": "hexlet.io"
+  "age": 20,
+  "admin": true,
+  "home": "hexlet.io",
+  "expired": false
 }
