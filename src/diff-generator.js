@@ -1,49 +1,19 @@
-import fs from 'fs';
 import path from 'path';
-import _ from 'lodash';
-import parsers from './parsers/index.js';
+import fs from 'fs';
+import getConfigParser from './parsers/parser-factory.js';
+import getDiffFormatter from './formatters/diff-formatter-factory.js';
+import buildDiffAst from './diff-ast-creator.js';
 
-const getConfigParser = (fileExtension) => {
-  switch (fileExtension) {
-    case '.yml':
-    case '.yaml':
-      return parsers.parseYaml;
-    case '.json':
-      return parsers.parseJson;
-    case '.ini':
-      return parsers.parseIni;
-    default:
-      throw new Error('Unsupported config file');
-  }
-};
-
-export default (inputPathLeft, inputPathRight) => {
-  const resolvedPathLeft = path.resolve(process.cwd(), inputPathLeft);
+export default (pathBefore, pathAfter, format) => {
+  const resolvedPathLeft = path.resolve(process.cwd(), pathBefore);
   const extensionLeft = path.extname(resolvedPathLeft);
-  const resolvedPathRight = path.resolve(process.cwd(), inputPathRight);
+  const resolvedPathRight = path.resolve(process.cwd(), pathAfter);
   const extensionRight = path.extname(resolvedPathRight);
 
-  const parsedContentLeft = getConfigParser(extensionLeft)(fs.readFileSync(resolvedPathLeft, 'utf8'));
-  const parsedContentRight = getConfigParser(extensionRight)(fs.readFileSync(resolvedPathRight, 'utf8'));
+  const parsedContentBefore = getConfigParser(extensionLeft)(fs.readFileSync(resolvedPathLeft, 'utf8'));
+  const parsedContentAfter = getConfigParser(extensionRight)(fs.readFileSync(resolvedPathRight, 'utf8'));
 
-  const leftEntries = Object.entries(parsedContentLeft);
-  const rightExtraEntries = Object.entries(parsedContentRight)
-    .filter(([key]) => !_.has(parsedContentLeft, key));
-
-  const commonDiffLines = leftEntries.map(([key, value]) => {
-    const removedDiffPart = `- ${key}: ${value}`;
-    if (!_.has(parsedContentRight, key)) {
-      return removedDiffPart;
-    }
-    const rightValue = parsedContentRight[key];
-
-    if (value === rightValue) return `${key}: ${value}`;
-
-    return `${removedDiffPart}\n+ ${key}: ${rightValue}`;
-  });
-
-  const rightExtraDiffLines = rightExtraEntries.map(([key, value]) => `+ ${key}: ${value}`);
-
-  const totalDiffLines = [...commonDiffLines, ...rightExtraDiffLines];
-  return totalDiffLines.join('\n');
+  const diffAst = buildDiffAst(parsedContentBefore, parsedContentAfter);
+  const formatDiff = getDiffFormatter(format);
+  return formatDiff(diffAst);
 };
