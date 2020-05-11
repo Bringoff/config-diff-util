@@ -15,8 +15,11 @@ where `filepath1` and `filepath2` must be either relative or absolute paths to c
 #### INI support
 [![asciicast](https://asciinema.org/a/jPVzXs9jbX9EREpRlIfi3dnkf.svg)](https://asciinema.org/a/jPVzXs9jbX9EREpRlIfi3dnkf)
 
-#### Nested structure support
+#### Stylish output (with in-place change marks) format support
 [![asciicast](https://asciinema.org/a/Y3cTlJx4hVN3gxfNJDvOPwKrk.svg)](https://asciinema.org/a/Y3cTlJx4hVN3gxfNJDvOPwKrk)
 
 #### Plain output format support
 [![asciicast](https://asciinema.org/a/6RShvMl47XIbLvT4XNoCOen8B.svg)](https://asciinema.org/a/6RShvMl47XIbLvT4XNoCOen8B)
+
+#### JSON output format support
+[![asciicast](https://asciinema.org/a/5WP6Og68HLWO6VDmnGFME9rjl.svg)](https://asciinema.org/a/5WP6Og68HLWO6VDmnGFME9rjl)
