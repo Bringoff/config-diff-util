@@ -1,7 +1,7 @@
 import path from 'path';
 import fs from 'fs';
 import getConfigParser from './parsers/parser-factory.js';
-import getDiffFormatter from './formatters/diff-formatter-factory.js';
+import getDiffFormatter from './formatters/index.js';
 import buildDiffAst from './diff-ast-creator.js';
 
 export default (pathBefore, pathAfter, format) => {
