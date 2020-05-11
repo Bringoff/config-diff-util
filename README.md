@@ -17,3 +17,6 @@ where `filepath1` and `filepath2` must be either relative or absolute paths to c
 
 #### Nested structure support
 [![asciicast](https://asciinema.org/a/Y3cTlJx4hVN3gxfNJDvOPwKrk.svg)](https://asciinema.org/a/Y3cTlJx4hVN3gxfNJDvOPwKrk)
+
+#### Plain output format support
+[![asciicast](https://asciinema.org/a/6RShvMl47XIbLvT4XNoCOen8B.svg)](https://asciinema.org/a/6RShvMl47XIbLvT4XNoCOen8B)
