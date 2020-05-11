@@ -9,6 +9,7 @@ const getRelativeFixturePath = (filename) => path.join('.', '__fixtures__', file
 describe.each([
   ['stylish'],
   ['plain'],
+  ['json'],
 ])('diff building', (formatterName) => {
   test.each([
     ['json', getRelativeFixturePath('before.json'), getAbsoluteFixturePath('after.json')],
