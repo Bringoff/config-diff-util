@@ -14,3 +14,6 @@ where `filepath1` and `filepath2` must be either relative or absolute paths to c
 
 #### INI support
 [![asciicast](https://asciinema.org/a/jPVzXs9jbX9EREpRlIfi3dnkf.svg)](https://asciinema.org/a/jPVzXs9jbX9EREpRlIfi3dnkf)
+
+#### Nested structure support
+[![asciicast](https://asciinema.org/a/Y3cTlJx4hVN3gxfNJDvOPwKrk.svg)](https://asciinema.org/a/Y3cTlJx4hVN3gxfNJDvOPwKrk)
