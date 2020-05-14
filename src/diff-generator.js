@@ -1,6 +1,6 @@
 import path from 'path';
 import fs from 'fs';
-import getConfigParser from './parsers/parser-factory.js';
+import getConfigParser from './parsers/index.js';
 import getDiffFormatter from './formatters/index.js';
 import buildDiffAst from './diff-ast-creator.js';
 
