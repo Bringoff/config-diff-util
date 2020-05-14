@@ -4,11 +4,13 @@ import getConfigParser from './parsers/index.js';
 import getDiffFormatter from './formatters/index.js';
 import buildDiffAst from './diff-ast-creator.js';
 
+const getFileExtensionFromPath = (filepath) => path.extname(filepath).substring(1);
+
 export default (pathBefore, pathAfter, format) => {
   const resolvedPathLeft = path.resolve(process.cwd(), pathBefore);
-  const extensionLeft = path.extname(resolvedPathLeft);
+  const extensionLeft = getFileExtensionFromPath(resolvedPathLeft);
   const resolvedPathRight = path.resolve(process.cwd(), pathAfter);
-  const extensionRight = path.extname(resolvedPathRight);
+  const extensionRight = getFileExtensionFromPath(resolvedPathRight);
 
   const parsedContentBefore = getConfigParser(extensionLeft)(fs.readFileSync(resolvedPathLeft, 'utf8'));
   const parsedContentAfter = getConfigParser(extensionRight)(fs.readFileSync(resolvedPathRight, 'utf8'));

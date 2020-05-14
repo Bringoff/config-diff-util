@@ -4,12 +4,12 @@ import parseIni from './ini-parser.js';
 
 export default (fileExtension) => {
   switch (fileExtension) {
-    case '.yml':
-    case '.yaml':
+    case 'yml':
+    case 'yaml':
       return parseYaml;
-    case '.json':
+    case 'json':
       return parseJson;
-    case '.ini':
+    case 'ini':
       return parseIni;
     default:
       throw new Error('Unsupported config file');
