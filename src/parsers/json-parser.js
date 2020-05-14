@@ -1,1 +1,1 @@
-export default (jsonContent) => JSON.parse(jsonContent);
+export default JSON.parse;
