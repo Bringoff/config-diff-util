@@ -1,5 +1,4 @@
 import _ from 'lodash';
-import Entry from './ast-entry.js';
 
 const isNestedStructure = (value) => _.isObject(value) && !_.isArray(value);
 
@@ -10,17 +9,19 @@ const buildDiffAst = (before, after) => {
 
   const commonDiffEvents = beforeEntries.map(([key, value]) => {
     if (!_.has(after, key)) {
-      return new Entry('removed', key, value);
+      return { event: 'removed', key, value };
     }
     const afterValue = after[key];
-    if (value === afterValue) return new Entry('unchanged', key, value);
+    if (value === afterValue) return { event: 'unchanged', key, value };
     if (isNestedStructure(value) && isNestedStructure(afterValue)) {
-      return new Entry('nestedModified', key, buildDiffAst(value, afterValue || {}));
+      return { event: 'nestedModified', key, value: buildDiffAst(value, afterValue || {}) };
     }
-    return new Entry('modified', key, afterValue, value);
+    return {
+      event: 'modified', key, value: afterValue, oldValue: value,
+    };
   });
 
-  const afterAddedEvents = afterAddedEntries.map(([key, value]) => new Entry('added', key, value));
+  const afterAddedEvents = afterAddedEntries.map(([key, value]) => ({ event: 'added', key, value }));
   return _.sortBy([...commonDiffEvents.flat(), ...afterAddedEvents], 'key');
 };
 
