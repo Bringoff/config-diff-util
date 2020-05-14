@@ -12,6 +12,6 @@ export default (fileExtension) => {
     case 'ini':
       return parseIni;
     default:
-      throw new Error('Unsupported config file');
+      throw new Error(`Unsupported config file: ${fileExtension}`);
   }
 };
