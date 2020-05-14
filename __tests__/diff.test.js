@@ -12,10 +12,12 @@ describe.each([
   ['json'],
 ])('diff building', (formatterName) => {
   test.each([
-    ['json', getRelativeFixturePath('before.json'), getAbsoluteFixturePath('after.json')],
-    ['yaml', getRelativeFixturePath('before.yml'), getAbsoluteFixturePath('after.yml')],
-    ['ini', getRelativeFixturePath('before.ini'), getAbsoluteFixturePath('after.ini')],
-  ])('generate %s diff', async (_extension, pathLeft, pathRight) => {
+    ['before.json', 'after.json'],
+    ['before.yml', 'after.yml'],
+    ['before.ini', 'after.ini'],
+  ])('generate "%s - %s" diff', async (filenameBefore, filenameAfter) => {
+    const pathLeft = getRelativeFixturePath(filenameBefore);
+    const pathRight = getAbsoluteFixturePath(filenameAfter);
     const expectedDiff = await fs.readFile(getRelativeFixturePath(`diff.${formatterName}`), 'utf-8');
 
     const generatedDiff = genDiff(pathLeft, pathRight, formatterName);
