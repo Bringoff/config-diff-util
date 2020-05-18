@@ -1,7 +1,7 @@
 import path from 'path';
 import { promises as fs } from 'fs';
 
-import genDiff from '../src/diff-generator.js';
+import genDiff from '../src/index.js';
 
 const getAbsoluteFixturePath = (filename) => path.join(path.resolve(), '__fixtures__', filename);
 const getRelativeFixturePath = (filename) => path.join('.', '__fixtures__', filename);
