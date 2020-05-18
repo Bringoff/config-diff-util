@@ -2,26 +2,26 @@ import _ from 'lodash';
 
 const isNestedStructure = (value) => _.isObject(value) && !_.isArray(value);
 
-const buildDiffAst = (before, after) => {
-  const beforeKeys = Object.keys(before);
-  const afterKeys = Object.keys(after);
+const buildDiffAst = (data1, data2) => {
+  const keys1 = Object.keys(data1);
+  const keys2 = Object.keys(data2);
 
-  const commonKeys = _.intersection(beforeKeys, afterKeys);
+  const commonKeys = _.intersection(keys1, keys2);
   const commonDiffEvents = commonKeys.map((key) => {
-    const beforeValue = before[key];
-    const afterValue = after[key];
-    if (beforeValue === afterValue) return { event: 'unchanged', key, value: beforeValue };
-    if (isNestedStructure(beforeValue) && isNestedStructure(afterValue)) {
-      return { event: 'nestedModified', key, value: buildDiffAst(beforeValue, afterValue) };
+    const value1 = data1[key];
+    const value2 = data2[key];
+    if (value1 === value2) return { event: 'unchanged', key, value: value1 };
+    if (isNestedStructure(value1) && isNestedStructure(value2)) {
+      return { event: 'nestedModified', key, value: buildDiffAst(value1, value2) };
     }
     return {
-      event: 'modified', key, value: afterValue, oldValue: beforeValue,
+      event: 'modified', key, value: value2, oldValue: value1,
     };
   });
-  const removedEvents = _.difference(beforeKeys, commonKeys)
-    .map((key) => ({ event: 'removed', key, value: before[key] }));
-  const addedEvents = _.difference(afterKeys, commonKeys)
-    .map((key) => ({ event: 'added', key, value: after[key] }));
+  const removedEvents = _.difference(keys1, commonKeys)
+    .map((key) => ({ event: 'removed', key, value: data1[key] }));
+  const addedEvents = _.difference(keys2, commonKeys)
+    .map((key) => ({ event: 'added', key, value: data2[key] }));
 
   return _.sortBy([...commonDiffEvents.flat(), ...removedEvents, ...addedEvents], 'key');
 };
