@@ -34,7 +34,7 @@ ${formatKeyValueLine(key, oldValue, depth, '-')}`,
     ].join('\n'),
   };
 
-  return formattingOptions[diffAst.event](diffAst);
+  return formattingOptions[diffAst.type](diffAst);
 };
 
 export default (ast) => ['{', formatDiff(ast, 0), '}'].join('\n');

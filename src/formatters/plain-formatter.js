@@ -26,8 +26,8 @@ const formatDiffAst = (ast, parentEntryName = '') => {
     nestedModified: ({ key, value }) => formatDiffAst(value,
       buildFullPropertyName(key, parentEntryName)),
   };
-  const { event } = ast;
-  return formattingOptions[event](ast);
+  const { type } = ast;
+  return formattingOptions[type](ast);
 };
 
 export default formatDiffAst;
