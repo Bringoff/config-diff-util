@@ -19,7 +19,7 @@ const buildDiffAst = (data1, data2) => {
       type: 'modified', key, value: value2, oldValue: value1,
     };
   });
-  return _.sortBy([...commonDiffEvents.flat()], 'key');
+  return _.sortBy(commonDiffEvents, 'key');
 };
 
 export default buildDiffAst;
