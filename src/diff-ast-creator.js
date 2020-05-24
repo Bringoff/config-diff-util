@@ -13,7 +13,7 @@ const buildDiffAst = (data1, data2) => {
     if (!_.has(data2, key)) return { type: 'removed', key, value: value1 };
     if (value1 === value2) return { type: 'unchanged', key, value: value1 };
     if (_.isPlainObject(value1) && _.isPlainObject(value2)) {
-      return { type: 'nestedModified', key, value: buildDiffAst(value1, value2) };
+      return { type: 'nestedModified', key, children: buildDiffAst(value1, value2) };
     }
     return {
       type: 'modified', key, value: value2, oldValue: value1,

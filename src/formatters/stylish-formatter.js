@@ -27,9 +27,9 @@ const formatDiff = (diffAst, depth = 0) => {
     removed: ({ key, value }) => `${formatKeyValueLine(key, value, depth, '-')}`,
     modified: ({ key, value, oldValue }) => `${formatKeyValueLine(key, value, depth, '+')}
 ${formatKeyValueLine(key, oldValue, depth, '-')}`,
-    nestedModified: ({ key, value }) => [
+    nestedModified: ({ key, children }) => [
       `${buildPadding(depth)}${key}: {`,
-      `${formatDiff(value, depth)}`,
+      `${formatDiff(children, depth)}`,
       `${buildPadding(depth)}}`,
     ].join('\n'),
   };

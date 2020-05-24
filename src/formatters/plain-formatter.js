@@ -23,7 +23,7 @@ const formatDiffAst = (ast, parentEntryName = '') => {
     added: ({ key, value }) => `${formatPropertyLabel(key, parentEntryName)} was added with value: ${formatValue(value)}`,
     removed: ({ key }) => `${formatPropertyLabel(key, parentEntryName)} was deleted`,
     modified: ({ key, value, oldValue }) => `${formatPropertyLabel(key, parentEntryName)} was changed from ${formatValue(oldValue)} to ${formatValue(value)}`,
-    nestedModified: ({ key, value }) => formatDiffAst(value,
+    nestedModified: ({ key, children }) => formatDiffAst(children,
       buildFullPropertyName(key, parentEntryName)),
   };
   const { type } = ast;
