@@ -1,7 +1,5 @@
 import _ from 'lodash';
 
-const isNestedStructure = (value) => _.isObject(value) && !_.isArray(value);
-
 const buildDiffAst = (data1, data2) => {
   const keys1 = Object.keys(data1);
   const keys2 = Object.keys(data2);
@@ -14,7 +12,7 @@ const buildDiffAst = (data1, data2) => {
     if (!keys1.includes(key)) return { type: 'added', key, value: value2 };
     if (!keys2.includes(key)) return { type: 'removed', key, value: value1 };
     if (value1 === value2) return { type: 'unchanged', key, value: value1 };
-    if (isNestedStructure(value1) && isNestedStructure(value2)) {
+    if (_.isPlainObject(value1) && _.isPlainObject(value2)) {
       return { type: 'nestedModified', key, value: buildDiffAst(value1, value2) };
     }
     return {
