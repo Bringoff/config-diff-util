@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 const buildFullPropertyName = (name, parentName = '') => {
   if (parentName.length === 0) return name;
   return `${parentName}.${name}`;
@@ -16,8 +14,7 @@ const formatValue = (value) => {
   return valueNameByTypeMappers[typeof value](value);
 };
 
-const formatDiffAst = (ast, parentEntryName = '') => {
-  if (_.isArray(ast)) return ast.map((entry) => formatDiffAst(entry, parentEntryName)).filter((line) => line).join('\n');
+const formatDiffAst = (ast, parentEntryName = '') => ast.map((entry) => {
   const formattingOptions = {
     unchanged: () => null,
     added: ({ key, value }) => `${formatPropertyLabel(key, parentEntryName)} was added with value: ${formatValue(value)}`,
@@ -26,8 +23,8 @@ const formatDiffAst = (ast, parentEntryName = '') => {
     nestedModified: ({ key, children }) => formatDiffAst(children,
       buildFullPropertyName(key, parentEntryName)),
   };
-  const { type } = ast;
-  return formattingOptions[type](ast);
-};
+  const { type } = entry;
+  return formattingOptions[type](entry);
+}).filter((line) => line).join('\n');
 
 export default formatDiffAst;

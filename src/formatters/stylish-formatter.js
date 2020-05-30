@@ -17,10 +17,7 @@ const formatKeyValueLine = (key, value, depth, operationSign) => {
   return `${paddingAndOperationSign}${key}: ${formatValue(value, depth)}`;
 };
 
-const formatDiff = (diffAst, depth = 0) => {
-  if (_.isArray(diffAst)) {
-    return diffAst.map((entry) => formatDiff(entry, depth + 1)).join('\n');
-  }
+const formatDiff = (diffAst, depth = 1) => diffAst.map((entry) => {
   const formattingOptions = {
     unchanged: ({ key, value }) => `${formatKeyValueLine(key, value, depth)}`,
     added: ({ key, value }) => `${formatKeyValueLine(key, value, depth, '+')}`,
@@ -29,12 +26,12 @@ const formatDiff = (diffAst, depth = 0) => {
 ${formatKeyValueLine(key, oldValue, depth, '-')}`,
     nestedModified: ({ key, children }) => [
       `${buildPadding(depth)}${key}: {`,
-      `${formatDiff(children, depth)}`,
+      `${formatDiff(children, depth + 1)}`,
       `${buildPadding(depth)}}`,
     ].join('\n'),
   };
 
-  return formattingOptions[diffAst.type](diffAst);
-};
+  return formattingOptions[entry.type](entry);
+}).join('\n');
 
-export default (ast) => ['{', formatDiff(ast, 0), '}'].join('\n');
+export default (ast) => ['{', formatDiff(ast), '}'].join('\n');
